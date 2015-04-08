@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import django.contrib.postgres.fields
 import django.contrib.postgres.fields.hstore
 from django.db import migrations, models
+import postgres_tests.fields
 
 
 class Migration(migrations.Migration):
@@ -123,6 +124,20 @@ class Migration(migrations.Migration):
                 ('related_field', models.ForeignKey('postgres_tests.AggregateTestModel', null=True)),
             ]
         ),
+        migrations.RunSQL(
+            'CREATE TYPE time_boolean AS (time time, boolean boolean)',
+            reverse_sql='DROP TYPE time_boolean'
+        ),
+        migrations.CreateModel(
+            name='CompositeFieldModel',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('field', postgres_tests.fields.TimeBooleanField()),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        )
     ]
 
     pg_92_operations = [

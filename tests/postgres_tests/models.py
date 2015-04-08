@@ -4,6 +4,8 @@ from django.contrib.postgres.fields import (
 )
 from django.db import connection, models
 
+from .fields import TimeBooleanField
+
 
 class IntegerArrayModel(models.Model):
     field = ArrayField(models.IntegerField())
@@ -80,3 +82,7 @@ class StatTestModel(models.Model):
     int1 = models.IntegerField()
     int2 = models.IntegerField()
     related_field = models.ForeignKey(AggregateTestModel, null=True)
+
+
+class CompositeFieldModel(models.Model):
+    field = TimeBooleanField()
