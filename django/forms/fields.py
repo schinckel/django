@@ -316,7 +316,9 @@ class IntegerField(Field):
         if min_value is not None:
             self.validators.append(validators.MinValueValidator(min_value))
         if step_size is not None:
-            self.validators.append(validators.StepValueValidator(step_size))
+            self.validators.append(
+                validators.StepValueValidator(step_size, offset=min_value)
+            )
 
     def to_python(self, value):
         """
@@ -614,6 +616,9 @@ class EmailField(CharField):
     default_validators = [validators.validate_email]
 
     def __init__(self, **kwargs):
+        # The default maximum length of an email is 320 characters per RFC 3696
+        # section 3.
+        kwargs.setdefault("max_length", 320)
         super().__init__(strip=True, **kwargs)
 
 

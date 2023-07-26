@@ -677,6 +677,10 @@ is:
 
 Requires ``gettext`` 0.19 or newer.
 
+.. django-admin-option:: --no-obsolete
+
+Removes obsolete message strings from the ``.po`` files.
+
 .. django-admin-option:: --keep-pot
 
 Prevents deleting the temporary ``.pot`` files generated before creating the
@@ -756,6 +760,9 @@ generated migration files to ``stdout``.
 
 Merges model changes into the latest migration and optimize the resulting
 operations.
+
+The updated migration will have a generated name. In order to preserve the
+previous name, set it using ``--name``.
 
 ``migrate``
 -----------
@@ -1755,18 +1762,6 @@ documentation.
 .. django-admin:: clearsessions
 
 Can be run as a cron job or directly to clean out expired sessions.
-
-``django.contrib.sitemaps``
----------------------------
-
-``ping_google``
-~~~~~~~~~~~~~~~
-
-This command is only available if the :doc:`Sitemaps framework
-</ref/contrib/sitemaps>` (``django.contrib.sitemaps``) is installed.
-
-Please refer to its :djadmin:`description <ping_google>` in the Sitemaps
-documentation.
 
 ``django.contrib.staticfiles``
 ------------------------------
